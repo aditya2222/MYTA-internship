@@ -3,12 +3,21 @@ var notes ={"status":0,"data":{"childList":[{"childList":[],"_id":"5ae7e55bbd32e
 
 //notes.json parser
 var notes1 = "";
+var keyword = window.location.href;
+var newkeyword = "";
+for (var i = keyword.length-1;i>=0;i--){
+newkeyword+=keyword.substring(keyword.lastIndexOf(".")+1,keyword.lastIndexOf("/"));
+break;
+}
+newkeyword=newkeyword.substr(1).slice(0, -1);
+newkeyword=newkeyword.replace("_"," ");
+console.log(newkeyword);
 
 for(var k=0;k<Object.keys(notes.data.childList).length;k++){
-	if(notes.data.childList[k].name.indexOf('Electric')>-1){
+	if(notes.data.childList[k].name.indexOf(newkeyword)>-1){
     notes1+= "<h1>"+notes.data.childList[k].name+"</h1>";
 }
-        if(notes.data.childList[k].text && notes.data.childList[k].name.indexOf('Electric')>-1 ){
+        if(notes.data.childList[k].text && notes.data.childList[k].name.indexOf(newkeyword)>-1 ){
            notes1 += notes.data.childList[k].text+"<br><hr style='border: none;height:1px;color:#333;background-color: #333'>";
            for(var newkey=0;newkey<=Object.keys(notes.data.childList).length;newkey++){
            	if(notes.data.childList[k].childList[newkey]){
@@ -29,4 +38,8 @@ function redirectFunctionNotes(){
 
 function redirectFunctionContent(){
 	window.location = window.location.href+"details.html";
+}
+
+function redirectFunctionVbq(){
+	window.location  = window.location.href+"vbq.html";
 }
